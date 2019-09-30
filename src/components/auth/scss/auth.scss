@@ -1,0 +1,29 @@
+// body {
+//     backgroundColor: theme.palette.common.white,
+// }
+
+.auth-page-wrapper {
+  // margin-top: theme.spacing(8),
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-page-avatar {
+  // margin: theme.spacing(1),
+  margin: 1rem;
+  // background-color: theme.palette.secondary.main,
+  background-color: #f50057;
+}
+
+.auth-page-form {
+  width: '100%';
+  // marginTop: theme.spacing(1),
+  margin-top: 1rem;
+}
+
+.auth-page-submit {
+  // margin: theme.spacing(3, 0, 2),
+  margin: 3rem 0 2rem 0;
+}
