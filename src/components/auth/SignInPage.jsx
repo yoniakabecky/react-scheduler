@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import {
-  Avatar, Button, CssBaseline, TextField, FormControlLabel,
-  Checkbox, Grid, Box, Container, Typography,
+  Avatar, Button, CssBaseline, TextField, Grid, Container, Typography,
+  // FormControlLabel, Checkbox, Box, 
 } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import './scss/auth.scss';
+import firebase from '../../firebase/firebase';
+import { AuthContext } from '../../context/Auth';
 
 
-const SignInPage = () => {
+const SignInPage = ({ history }) => {
+  const handleLogin = useCallback(async event => {
+    event.preventDefault();
+    const { email, password } = event.target.elements;
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email.value, password.value);
+      history.push("/");
+    } catch (error) {
+      alert(error);
+    }
+  }, [history])
+
+  const { currentUser } = useContext(AuthContext);
+
+  if (currentUser) return <Redirect to="/" />;
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -19,7 +36,7 @@ const SignInPage = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className="auth-page-form" noValidate>
+        <form className="auth-page-form" noValidate onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -36,16 +53,15 @@ const SignInPage = () => {
             margin="normal"
             required
             fullWidth
-            name="password"
+            id="password"
             label="Password"
             type="password"
-            id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth
@@ -58,7 +74,7 @@ const SignInPage = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link to="#" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
@@ -77,4 +93,4 @@ const SignInPage = () => {
   );
 }
 
-export default SignInPage;
+export default withRouter(SignInPage);

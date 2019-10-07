@@ -6,6 +6,7 @@ import { Container } from '@material-ui/core';
 const LandingPage = () => {
   return (
     <Container>
+      <h1>this is a landing page</h1>
       <Link to="/week">Week</Link>
     </Container>
   );

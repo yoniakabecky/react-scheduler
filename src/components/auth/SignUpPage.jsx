@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
-  Avatar, Button, CssBaseline, TextField, FormControlLabel,
-  Checkbox, Grid, Box, Container, Typography,
+  Avatar, Button, CssBaseline, TextField, Grid, Container, Typography,
+  // FormControlLabel, Checkbox, Box,
 } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './scss/auth.scss';
+import firebase from '../../firebase/firebase';
 
 
-const SignUpPage = () => {
+const SignUpPage = ({ history }) => {
+
+  const handleSignUp = useCallback(async event => {
+    event.preventDefault();
+    const { email, password, fullName, displayName } = event.target.elements;
+    console.log(fullName.value, displayName.value)
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email.value, password.value);
+      history.push("/");
+    } catch (error) {
+      alert(error);
+    }
+  }, [history]);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -19,12 +33,11 @@ const SignUpPage = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className="auth-page-form" noValidate>
+        <form className="auth-page-form" noValidate onSubmit={handleSignUp}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                name="fullName"
                 variant="outlined"
                 required
                 fullWidth
@@ -43,6 +56,17 @@ const SignUpPage = () => {
                 name="displayName"
                 autoComplete="dname"
               />
+            </Grid> */}
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="displayName"
+                label="Company Name"
+                type="text"
+                autoComplete="display-name"
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -51,7 +75,7 @@ const SignUpPage = () => {
                 fullWidth
                 id="email"
                 label="Email Address"
-                name="email"
+                type="email"
                 autoComplete="email"
               />
             </Grid>
@@ -60,10 +84,9 @@ const SignUpPage = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
+                id="password"
                 label="Password"
                 type="password"
-                id="password"
                 autoComplete="current-password"
               />
             </Grid>
@@ -74,6 +97,7 @@ const SignUpPage = () => {
             variant="contained"
             color="primary"
             style={{ margin: "2rem 0 1rem 0" }}
+
           >
             Sign Up
           </Button>
@@ -93,4 +117,4 @@ const SignUpPage = () => {
   );
 }
 
-export default SignUpPage;
+export default withRouter(SignUpPage);
