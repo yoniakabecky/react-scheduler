@@ -1,10 +1,14 @@
 # 📅 Scheduler / Shift Maker 📅
   
 > Make your restaurant/café shifts easily  
+> This is a part of "Term Node.js 2nd Project"
+  
+  
   
 ## Demo
-[Demo Site](https://react-scheduler-yoni.firebaseapp.com/)  
- (Haven't finished yet)
+[Demo Site](https://react-scheduler-yoni.firebaseapp.com/)(Haven't finished yet)
+  
+  
   
 ## Quick Start
   
@@ -18,7 +22,9 @@ yarn
 yarn start  
 ```
   
-### This is a part of "Term Node.js 2nd Project"
+  
+  
+## 2nd Project Criteria
   
 - [x] Authentication
 - [ ] Database / API
