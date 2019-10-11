@@ -12,7 +12,7 @@
   
 ## Quick Start
   
-```
+``` sh
 # Install dependencies
 yarn
   

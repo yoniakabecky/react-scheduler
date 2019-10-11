@@ -11,19 +11,20 @@ import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 
 const ChangeSchedule = ({ close, data }) => {
-  const { shift } = data;
-  console.log(shift)
+  // const { shift } = data;
+  // console.log('shift', shift)
   const [selectedTime, setSelectedTime] = React.useState({
     startTime: moment(),
     endTime: moment(),
   });
 
-  const handleTimeChange = (event, date) => {
-    console.log(event, date)
+  const handleTimeChange = (name, date) => {
+    // console.log(date)
     setSelectedTime({
       ...selectedTime,
-      [event.name]: date
+      [name]: date
     });
+    // console.log(selectedTime)
   };
 
   return (
@@ -38,7 +39,7 @@ const ChangeSchedule = ({ close, data }) => {
               name="startTime"
               label="Start Time"
               value={selectedTime.startTime}
-              onChange={handleTimeChange}
+              onChange={(e) => handleTimeChange("startTime")}
               KeyboardButtonProps={{
                 'aria-label': 'change time',
               }}
@@ -51,7 +52,7 @@ const ChangeSchedule = ({ close, data }) => {
               name="endTime"
               label="End Time"
               value={selectedTime.endTime}
-              onChange={handleTimeChange}
+              onChange={() => handleTimeChange("endTime")}
               KeyboardButtonProps={{
                 'aria-label': 'change time',
               }}
