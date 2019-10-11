@@ -6,18 +6,19 @@ import {
 import { LockOutlined } from '@material-ui/icons';
 import { Link, withRouter } from 'react-router-dom';
 import './scss/auth.scss';
-import firebase from '../../firebase/firebase';
+import { auth } from '../../firebase/firebase';
 
 
 const SignUpPage = ({ history }) => {
 
   const handleSignUp = useCallback(async event => {
     event.preventDefault();
-    const { email, password, fullName, displayName } = event.target.elements;
-    console.log(fullName.value, displayName.value)
+    const { email, password, displayName } = event.target.elements;
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email.value, password.value);
-      history.push("/");
+      await auth.createUserWithEmailAndPassword(email.value, password.value);
+      await auth.currentUser.updateProfile({ displayName: displayName.value })
+        .catch(error => alert('failed update profile', error));
+      history.push("/home");
     } catch (error) {
       alert(error);
     }

@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
 
-const LandingPage = () => {
+const HomePage = () => {
   return (
-    <Container>
-      <h1>this is a landing page</h1>
+    <Container maxWidth="xl">
+      <h1>this is user's home page</h1>
       <Link to="/week">Week</Link>
     </Container>
   );
 }
 
-export default LandingPage;
+export default HomePage;

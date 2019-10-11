@@ -6,7 +6,7 @@ import {
 import { LockOutlined } from '@material-ui/icons';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import './scss/auth.scss';
-import firebase from '../../firebase/firebase';
+import { auth } from '../../firebase/firebase';
 import { AuthContext } from '../../context/Auth';
 
 
@@ -15,8 +15,8 @@ const SignInPage = ({ history }) => {
     event.preventDefault();
     const { email, password } = event.target.elements;
     try {
-      await firebase.auth().signInWithEmailAndPassword(email.value, password.value);
-      history.push("/");
+      await auth.signInWithEmailAndPassword(email.value, password.value);
+      history.push("/home");
     } catch (error) {
       alert(error);
     }
@@ -24,7 +24,7 @@ const SignInPage = ({ history }) => {
 
   const { currentUser } = useContext(AuthContext);
 
-  if (currentUser) return <Redirect to="/" />;
+  if (currentUser) return <Redirect to="/home" />;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -74,7 +74,7 @@ const SignInPage = ({ history }) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="#" variant="body2">
+              <Link to="/forget-password">
                 Forgot password?
               </Link>
             </Grid>

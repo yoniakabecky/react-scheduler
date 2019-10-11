@@ -8,6 +8,14 @@ import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import { AuthContext } from '../../context/Auth';
 
+import { grey } from '@material-ui/core/colors';
+
+const styles = {
+  root: {
+    backgroundColor: grey[900],
+  }
+}
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -16,12 +24,12 @@ const Navbar = () => {
   console.log("currentUser", currentUser)
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" style={styles.root}>
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setIsMenuOpen(true)}>
             <Menu />
           </IconButton>
-          <Link to="/" className="navbar-title">
+          <Link to="/home" className="navbar-title">
             Scheduler
           </Link>
           {currentUser ? <SignedInLinks /> : <SignedOutLinks />}

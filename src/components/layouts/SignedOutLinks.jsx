@@ -6,10 +6,10 @@ const SignedOutLinks = () => {
   return (
     <>
       <Button color="inherit">
-        <NavLink to="/sign-in">Sign In</NavLink>
+        <NavLink to="/sign-in" className="navbar-btn">Sign In</NavLink>
       </Button>
       <Button color="inherit">
-        <NavLink to="/sign-up">Sign Up</NavLink>
+        <NavLink to="/sign-up" className="navbar-btn">Sign Up</NavLink>
       </Button>
     </>
   );

@@ -1,12 +1,13 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/database";
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 
 // Initialize Firebase
-const firebaseConfig = firebase.initializeApp({
+firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -17,29 +18,8 @@ const firebaseConfig = firebase.initializeApp({
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 });
 
-export default firebaseConfig;
+const auth = firebase.auth();
+const database = firebase.database();
 
 
-// firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-//     // Handle Errors here.
-//     var errorCode = error.code;
-//     var errorMessage = error.message;
-//     // ...
-// });
-
-// firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//         // User is signed in.
-//         var displayName = user.displayName;
-//         var email = user.email;
-//         var emailVerified = user.emailVerified;
-//         var photoURL = user.photoURL;
-//         var isAnonymous = user.isAnonymous;
-//         var uid = user.uid;
-//         var providerData = user.providerData;
-//         // ...
-//     } else {
-//         // User is signed out.
-//         // ...
-//     }
-// });
+export { firebase, auth, database };
