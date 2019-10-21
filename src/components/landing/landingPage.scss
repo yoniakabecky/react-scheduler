@@ -1,0 +1,39 @@
+.landing-wrapper {
+    height: calc(100vh - 64px);
+}
+
+// minHeight: 56, 
+//    [`${breakpoints.up('xs')} and (orientation: landscape)`]: { 
+//      minHeight: 48, 
+//    }, 
+//    [breakpoints.up('sm')]: { 
+//      minHeight: 64, 
+//    }, 
+//  }, 
+
+.landing-top-img {
+    background-image: url("https://picsum.photos/id/1060/5598/3732?grayscale&blur=4");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.landing-contents {
+    // margin: 10rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.landing-btn {
+    margin: 4rem 0;
+    width: 10rem;
+    height: 3rem;
+}
+
+.landing-link {
+    color: inherit;
+    text-decoration: none;
+  }

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import {
   Avatar, Button, CssBaseline, TextField, Grid, Container, Typography,
-  // FormControlLabel, Checkbox, Box,
+  // FormControlLabel, Checkbox,
 } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
 import { Link, withRouter } from 'react-router-dom';
@@ -36,28 +36,6 @@ const SignUpPage = ({ history }) => {
         </Typography>
         <form className="auth-page-form" noValidate onSubmit={handleSignUp}>
           <Grid container spacing={2}>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                variant="outlined"
-                required
-                fullWidth
-                id="fullName"
-                label="Your Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="displayName"
-                label="Display Name"
-                name="displayName"
-                autoComplete="dname"
-              />
-            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -67,6 +45,7 @@ const SignUpPage = ({ history }) => {
                 label="Company Name"
                 type="text"
                 autoComplete="display-name"
+                autoFocus
               />
             </Grid>
             <Grid item xs={12}>
@@ -96,9 +75,7 @@ const SignUpPage = ({ history }) => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             style={{ margin: "2rem 0 1rem 0" }}
-
           >
             Sign Up
           </Button>
@@ -111,9 +88,6 @@ const SignUpPage = ({ history }) => {
           </Grid>
         </form>
       </div>
-      {/* <Box mt={5}>
-        <Copyright />
-      </Box> */}
     </Container>
   );
 }

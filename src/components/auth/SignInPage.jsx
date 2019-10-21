@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import {
   Avatar, Button, CssBaseline, TextField, Grid, Container, Typography,
-  // FormControlLabel, Checkbox, Box, 
+  // FormControlLabel, Checkbox,
 } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
 import { Link, withRouter, Redirect } from 'react-router-dom';
@@ -66,7 +66,6 @@ const SignInPage = ({ history }) => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             // className="auth-page-submit"
             style={{ margin: "2rem 0 1rem 0" }}
           >
@@ -86,9 +85,6 @@ const SignInPage = ({ history }) => {
           </Grid>
         </form>
       </div>
-      {/* <Box mt={8}>
-        <Copyright />
-      </Box> */}
     </Container>
   );
 }
