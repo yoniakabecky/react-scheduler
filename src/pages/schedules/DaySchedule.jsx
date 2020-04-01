@@ -1,28 +1,37 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import {
-  Paper, Table, TableHead, TableRow, TableCell,
-  TableBody, Chip, Avatar, Container
-} from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
-import ChangeSchedule from '../dialogs/ChangeSchedule';
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Chip,
+  Avatar,
+  Container
+} from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
+import ChangeSchedule from "../../components/dialogs/ChangeSchedule";
 
 const styles = {
   wrapper: {
-    overflowX: "scroll",
+    overflowX: "scroll"
   }
-}
+};
 
 const DaySchedule = () => {
   const [openDialog, setOpenDialog] = React.useState(false);
 
   const closeDialog = () => {
     setOpenDialog(false);
-  }
+  };
 
   return (
     <Container maxWidth="xl">
-      <h2>> <Link to="/week">Week</Link> > Day Schedule</h2>
+      <h2>
+        > <Link to="/week">Week</Link> > Day Schedule
+      </h2>
       <Paper>
         <div style={styles.wrapper}>
           <Table>
@@ -45,14 +54,19 @@ const DaySchedule = () => {
                     avatar={<Avatar>E</Avatar>}
                     label="Employee"
                     // clickable
-                    onDelete={() => console.log('edit!!')}
+                    onDelete={() => console.log("edit!!")}
                     deleteIcon={<EditIcon />}
                   />
                 </TableCell>
                 <TableCell align="center" colSpan={3}></TableCell>
-                <TableCell align="center" style={{ background: "aqua" }} colSpan={3} onClick={() => setOpenDialog(true)}>
+                <TableCell
+                  align="center"
+                  style={{ background: "aqua" }}
+                  colSpan={3}
+                  onClick={() => setOpenDialog(true)}
+                >
                   18-25
-              </TableCell>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -61,6 +75,6 @@ const DaySchedule = () => {
       {openDialog ? <ChangeSchedule close={closeDialog} /> : null}
     </Container>
   );
-}
+};
 
 export default DaySchedule;

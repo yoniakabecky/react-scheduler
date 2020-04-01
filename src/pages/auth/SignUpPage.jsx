@@ -1,28 +1,36 @@
-import React, { useCallback } from 'react';
+import React, { useCallback } from "react";
 import {
-  Avatar, Button, CssBaseline, TextField, Grid, Container, Typography,
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Container,
+  Typography
   // FormControlLabel, Checkbox,
-} from '@material-ui/core';
-import { LockOutlined } from '@material-ui/icons';
-import { Link, withRouter } from 'react-router-dom';
-import './scss/auth.scss';
-import { auth } from '../../firebase/firebase';
-
+} from "@material-ui/core";
+import { LockOutlined } from "@material-ui/icons";
+import { Link, withRouter } from "react-router-dom";
+import "./auth.scss";
+import { auth } from "../../firebase/firebase";
 
 const SignUpPage = ({ history }) => {
-
-  const handleSignUp = useCallback(async event => {
-    event.preventDefault();
-    const { email, password, displayName } = event.target.elements;
-    try {
-      await auth.createUserWithEmailAndPassword(email.value, password.value);
-      await auth.currentUser.updateProfile({ displayName: displayName.value })
-        .catch(error => alert('failed update profile', error));
-      history.push("/home");
-    } catch (error) {
-      alert(error);
-    }
-  }, [history]);
+  const handleSignUp = useCallback(
+    async event => {
+      event.preventDefault();
+      const { email, password, displayName } = event.target.elements;
+      try {
+        await auth.createUserWithEmailAndPassword(email.value, password.value);
+        await auth.currentUser
+          .updateProfile({ displayName: displayName.value })
+          .catch(error => alert("failed update profile", error));
+        history.push("/home");
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
 
   return (
     <Container component="main" maxWidth="xs">
@@ -81,15 +89,13 @@ const SignUpPage = ({ history }) => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/sign-in">
-                Already have an account? Sign in
-              </Link>
+              <Link to="/sign-in">Already have an account? Sign in</Link>
             </Grid>
           </Grid>
         </form>
       </div>
     </Container>
   );
-}
+};
 
 export default withRouter(SignUpPage);
