@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
@@ -15,7 +15,7 @@ import Footer from "./components/layouts/Footer";
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <Router>
         <Navbar />
         <Switch>
           <Route exact path="/" component={LandingPage} />
@@ -27,7 +27,7 @@ function App() {
           <Route path="/forget-password" component={ForgetPassword} />
         </Switch>
         <Footer />
-      </BrowserRouter>
+      </Router>
     </AuthProvider>
   );
 }
