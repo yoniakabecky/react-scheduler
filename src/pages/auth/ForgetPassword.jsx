@@ -1,30 +1,42 @@
-import React from 'react';
+import React from "react";
+
+// Mui
 import {
-  Avatar, Button, CssBaseline, TextField, Container, Typography,
-} from '@material-ui/core';
-import { LockOutlined } from '@material-ui/icons';
-import { auth } from '../../firebase/firebase';
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Container,
+  Typography
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { LockOutlined } from "@material-ui/icons";
+
+// Auth
+import { auth } from "../../firebase/firebase";
 
 const ForgetPassword = () => {
+  const classes = useStyles();
 
   const handleReset = event => {
     event.preventDefault();
-    auth.sendPasswordResetEmail(event.target.email)
-      .catch(error => alert(error))
+    auth
+      .sendPasswordResetEmail(event.target.email)
+      .catch(error => alert(error));
   };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className="auth-page-wrapper">
-        <Avatar className="auth-page-avatar">
+      <div className={classes.root}>
+        <Avatar className={classes.avatar}>
           <LockOutlined />
         </Avatar>
         <Typography component="h1" variant="h5">
           Forgot your Password?
         </Typography>
         <p>Enter your email address to request a password reset</p>
-        <form className="auth-page-form" noValidate onSubmit={handleReset}>
+        <form className={classes.form} noValidate onSubmit={handleReset}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -40,8 +52,7 @@ const ForgetPassword = () => {
             fullWidth
             variant="contained"
             color="primary"
-            // className="auth-page-submit"
-            style={{ margin: "2rem 0 1rem 0" }}
+            className={classes.btn}
             disabled
           >
             Reset Password
@@ -50,6 +61,26 @@ const ForgetPassword = () => {
       </div>
     </Container>
   );
-}
+};
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    marginTop: "10vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: "1rem",
+    backgroundColor: "#f50057"
+  },
+  form: {
+    width: "100%",
+    marginTop: "1rem"
+  },
+  btn: {
+    margin: "2rem 0 1rem 0"
+  }
+}));
 
 export default ForgetPassword;

@@ -1,4 +1,7 @@
 import React, { useCallback } from "react";
+import { Link, withRouter } from "react-router-dom";
+
+// Mui
 import {
   Avatar,
   Button,
@@ -7,14 +10,16 @@ import {
   Grid,
   Container,
   Typography
-  // FormControlLabel, Checkbox,
 } from "@material-ui/core";
 import { LockOutlined } from "@material-ui/icons";
-import { Link, withRouter } from "react-router-dom";
-import "./auth.scss";
+import { makeStyles } from "@material-ui/core/styles";
+
+// Auth
 import { auth } from "../../firebase/firebase";
 
 const SignUpPage = ({ history }) => {
+  const classes = useStyles();
+
   const handleSignUp = useCallback(
     async event => {
       event.preventDefault();
@@ -35,14 +40,14 @@ const SignUpPage = ({ history }) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className="auth-page-wrapper">
-        <Avatar className="auth-page-avatar">
+      <div className={classes.root}>
+        <Avatar className={classes.avatar}>
           <LockOutlined />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className="auth-page-form" noValidate onSubmit={handleSignUp}>
+        <form className={classes.form} noValidate onSubmit={handleSignUp}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -83,7 +88,7 @@ const SignUpPage = ({ history }) => {
             type="submit"
             fullWidth
             variant="contained"
-            style={{ margin: "2rem 0 1rem 0" }}
+            className={classes.btn}
           >
             Sign Up
           </Button>
@@ -97,5 +102,25 @@ const SignUpPage = ({ history }) => {
     </Container>
   );
 };
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    marginTop: "10vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: "1rem",
+    backgroundColor: "#f50057"
+  },
+  form: {
+    width: "100%",
+    marginTop: "1rem"
+  },
+  btn: {
+    margin: "2rem 0 1rem 0"
+  }
+}));
 
 export default withRouter(SignUpPage);
