@@ -1,23 +1,24 @@
 import React, { useCallback, useContext } from "react";
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  Grid,
-  Container,
-  Typography
-  // FormControlLabel, Checkbox,
-} from "@material-ui/core";
-import { LockOutlined } from "@material-ui/icons";
-import { Link, withRouter, Redirect } from "react-router-dom";
-import "./auth.scss";
+import { withRouter, Redirect } from "react-router-dom";
+
+// Mui
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+
+// Auth
 import { auth } from "../../firebase/firebase";
 import { AuthContext } from "../../context/Auth";
 
+// Component
+import AuthPageWrapper from "../../components/auth/AuthPageWrapper";
+import SignInInputs from "../../components/auth/SignInInputs";
+import LinkToSignUp from "../../components/auth/LinkToSignUp";
+
 const SignInPage = ({ history }) => {
+  const classes = useStyles();
+
   const handleLogin = useCallback(
-    async event => {
+    async (event) => {
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
@@ -31,66 +32,34 @@ const SignInPage = ({ history }) => {
   );
 
   const { currentUser } = useContext(AuthContext);
-
   if (currentUser) return <Redirect to="/home" />;
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className="auth-page-wrapper">
-        <Avatar className="auth-page-avatar">
-          <LockOutlined />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className="auth-page-form" noValidate onSubmit={handleLogin}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="password"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-          />
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            // className="auth-page-submit"
-            style={{ margin: "2rem 0 1rem 0" }}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to="/forget-password">Forgot password?</Link>
-            </Grid>
-            <Grid item>
-              <Link to="/sign-up">{"Don't have an account? Sign Up"}</Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+    <AuthPageWrapper label="Sign in">
+      <form className={classes.form} noValidate onSubmit={handleLogin}>
+        <SignInInputs />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          className={classes.btn}
+        >
+          Sign In
+        </Button>
+        <LinkToSignUp />
+      </form>
+    </AuthPageWrapper>
   );
 };
+
+const useStyles = makeStyles((theme) => ({
+  form: {
+    width: "100%",
+    marginTop: "1rem",
+  },
+  btn: {
+    margin: "2rem 0 1rem 0",
+  },
+}));
 
 export default withRouter(SignInPage);

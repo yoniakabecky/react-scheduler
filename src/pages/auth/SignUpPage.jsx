@@ -1,20 +1,21 @@
 import React, { useCallback } from "react";
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  Grid,
-  Container,
-  Typography
-  // FormControlLabel, Checkbox,
-} from "@material-ui/core";
-import { LockOutlined } from "@material-ui/icons";
-import { Link, withRouter } from "react-router-dom";
-import "./auth.scss";
+import { withRouter } from "react-router-dom";
+
+// Mui
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+
+// Auth
 import { auth } from "../../firebase/firebase";
 
+// Component
+import AuthPageWrapper from "../../components/auth/AuthPageWrapper";
+import SignUpInputs from "../../components/auth/SignUpInputs";
+import LinkToSignIn from "../../components/auth/LinkToSignIn";
+
 const SignUpPage = ({ history }) => {
+  const classes = useStyles();
+
   const handleSignUp = useCallback(
     async event => {
       event.preventDefault();
@@ -33,69 +34,31 @@ const SignUpPage = ({ history }) => {
   );
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className="auth-page-wrapper">
-        <Avatar className="auth-page-avatar">
-          <LockOutlined />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className="auth-page-form" noValidate onSubmit={handleSignUp}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="displayName"
-                label="Company Name"
-                type="text"
-                autoComplete="display-name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                type="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="password"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            style={{ margin: "2rem 0 1rem 0" }}
-          >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link to="/sign-in">Already have an account? Sign in</Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+    <AuthPageWrapper label="Sign up">
+      <form className={classes.form} noValidate onSubmit={handleSignUp}>
+        <SignUpInputs />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          className={classes.btn}
+        >
+          Sign Up
+        </Button>
+        <LinkToSignIn />
+      </form>
+    </AuthPageWrapper>
   );
 };
+
+const useStyles = makeStyles(theme => ({
+  form: {
+    width: "100%",
+    marginTop: "1rem"
+  },
+  btn: {
+    margin: "2rem 0 1rem 0"
+  }
+}));
 
 export default withRouter(SignUpPage);
