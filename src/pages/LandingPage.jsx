@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import { Grid, Typography, Button } from "@material-ui/core";
+// Mui
+import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+
+// Components
+import LandingLeftPane from "../components/home/LandingLeftPane";
+import LandingRightPane from "../components/home/LandingRightPane";
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -17,28 +21,11 @@ const LandingPage = () => {
         elevation={6}
         className={classes.contents}
       >
-        <section>
-          <Typography component="h1" variant="h2">
-            Scheduler
-          </Typography>
-          <br />
-          <Typography component="h1" variant="h5">
-            Make your work shifts easily
-          </Typography>
-
-          <Button
-            type="submit"
-            variant="contained"
-            color="secondary"
-            className={classes.btn}
-          >
-            <Link to="/sign-up" className={classes.link}>
-              Get Started
-            </Link>
-          </Button>
-        </section>
+        <LandingLeftPane />
       </Grid>
-      <Grid item xs={false} sm={4} md={7} className={classes.img} />
+      <Grid item xs={false} sm={4} md={7}>
+        <LandingRightPane />
+      </Grid>
     </Grid>
   );
 };
@@ -63,13 +50,6 @@ const useStyles = makeStyles(theme => ({
   link: {
     color: "inherit",
     textDecoration: "none"
-  },
-  img: {
-    backgroundImage:
-      'url("https://picsum.photos/id/1060/5598/3732?grayscale&blur=4")',
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center"
   }
 }));
 
