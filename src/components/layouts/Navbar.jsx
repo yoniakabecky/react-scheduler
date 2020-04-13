@@ -1,60 +1,38 @@
-import React, { useState, useContext } from 'react';
-import { AppBar, Toolbar, IconButton } from '@material-ui/core';
-import { Menu, DateRange } from '@material-ui/icons';
-import './scss/layouts.scss';
-import MenuDrawer from './MenuDrawer';
-import { Link } from 'react-router-dom';
-import SignedInLinks from './SignedInLinks';
-import SignedOutLinks from './SignedOutLinks';
-import { AuthContext } from '../../context/Auth';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
-import { grey } from '@material-ui/core/colors';
+//Mui
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import { makeStyles } from "@material-ui/core/styles";
 
-const styles = {
-  root: {
-    backgroundColor: grey[900],
-  }
-}
+// Components
+import SignedInLinks from "./SignedInLinks";
+import SignedOutLinks from "./SignedOutLinks";
+import BrandLogo from "./BrandLogo";
+
+import { AuthContext } from "../../context/Auth";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const classes = useStyles();
   const { currentUser } = useContext(AuthContext);
-  console.log("currentUser", currentUser)
-
-  const SignedIn = () => (
-    <Toolbar>
-      <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setIsMenuOpen(true)}>
-        <Menu />
-      </IconButton>
-      <Link to="/home" className="navbar-title">
-        Scheduler
-      </Link>
-      <SignedInLinks />
-    </Toolbar>
-  )
-
-  const SignedOut = () => (
-    <Toolbar>
-      <DateRange />
-      <Link to="/home" className="navbar-title">
-        Scheduler
-      </Link>
-      <SignedOutLinks />
-    </Toolbar>
-  )
 
   return (
-    <>
-      <AppBar position="static" style={styles.root}>
-        {currentUser ? <SignedIn /> : <SignedOut />}
-      </AppBar>
-      <MenuDrawer
-        isOpen={isMenuOpen}
-        handleClose={() => setIsMenuOpen(false)}
-      />
-    </>
+    <AppBar position="static">
+      <Toolbar>
+        <Link to="/home" className={classes.brandLogo}>
+          <BrandLogo color="light" size={2} />
+        </Link>
+        {currentUser ? <SignedInLinks /> : <SignedOutLinks />}
+      </Toolbar>
+    </AppBar>
   );
-}
+};
+
+const useStyles = makeStyles((theme) => ({
+  brandLogo: {
+    flexGrow: 1,
+  },
+}));
 
 export default Navbar;
