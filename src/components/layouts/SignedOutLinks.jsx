@@ -1,18 +1,14 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import React from "react";
+
+import LinkedButton from "./LinkedButton";
 
 const SignedOutLinks = () => {
   return (
     <>
-      <Button color="inherit">
-        <NavLink to="/sign-in" className="navbar-btn">Sign In</NavLink>
-      </Button>
-      <Button variant="contained" color="secondary">
-        <NavLink to="/sign-up" className="navbar-btn">Sign Up</NavLink>
-      </Button>
+      <LinkedButton route="/sign-in" label="Sign In" />
+      <LinkedButton route="/sign-up" label="Sign Up" color="secondary" />
     </>
   );
-}
+};
 
 export default SignedOutLinks;

@@ -1,22 +1,27 @@
-import React, { useContext } from 'react';
-import { withRouter } from 'react-router-dom';
-import { Button, Menu, MenuItem } from '@material-ui/core';
-import { AccountCircle, KeyboardArrowDown, ExitToApp, Settings } from '@material-ui/icons';
-import { auth } from '../../firebase/firebase';
-import { AuthContext } from '../../context/Auth'
+import React from "react";
+import { withRouter } from "react-router-dom";
+
+// Mui
+import Button from "@material-ui/core/Button";
+import AvatarIcon from "@material-ui/icons/AccountCircle";
+
+// Auth
+import { auth } from "../../firebase/firebase";
+
+// Components
+import DropdownMenu from "./DropdownMenu";
 
 const SignedInLinks = ({ history }) => {
-  const { currentUser } = useContext(AuthContext);
-
-  const handleSignOut = async event => {
-    await auth.signOut()
-      .then(() => history.push("/"))
-      .catch(error => alert(error))
-  };
-
   const [open, setOpen] = React.useState(null);
 
-  const handleClick = event => {
+  const handleSignOut = async (event) => {
+    await auth
+      .signOut()
+      .then(() => history.push("/"))
+      .catch((error) => alert(error));
+  };
+
+  const handleClick = (event) => {
     setOpen(event.currentTarget);
   };
 
@@ -25,31 +30,17 @@ const SignedInLinks = ({ history }) => {
   };
 
   return (
-    <div>
+    <>
       <Button color="inherit" onClick={handleClick}>
-        <AccountCircle style={{ marginRight: "0.5rem" }} />
-        {currentUser.displayName}
-        <KeyboardArrowDown style={{ marginLeft: "0.1rem" }} />
+        <AvatarIcon />
       </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={open}
-        keepMounted
-        open={Boolean(open)}
-        onClose={handleClose}
-        style={{ top: "3rem" }}
-      >
-        <MenuItem onClick={handleSignOut} disabled>
-          <Settings />
-          Setting
-        </MenuItem>
-        <MenuItem onClick={handleSignOut}>
-          <ExitToApp />
-          Sign Out
-        </MenuItem>
-      </Menu>
-    </div>
+      <DropdownMenu
+        open={open}
+        handleClose={handleClose}
+        handleSignOut={handleSignOut}
+      />
+    </>
   );
-}
+};
 
 export default withRouter(SignedInLinks);
