@@ -1,13 +1,10 @@
-import React, { useCallback, useContext } from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 // Mui
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-
-// Auth
-import { auth } from "../../firebase/firebase";
-import { AuthContext } from "../../context/Auth";
 
 // Component
 import AuthPageWrapper from "../../components/auth/AuthPageWrapper";
@@ -16,28 +13,34 @@ import LinkToSignUp from "../../components/auth/LinkToSignUp";
 
 const SignInPage = ({ history }) => {
   const classes = useStyles();
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleLogin = useCallback(
-    async (event) => {
-      event.preventDefault();
-      const { email, password } = event.target.elements;
-      try {
-        await auth.signInWithEmailAndPassword(email.value, password.value);
+  const handleChange = (event) => {
+    setUserData({
+      ...userData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    axios
+      .post("/signin", userData)
+      .then((res) => {
+        console.log("signed in");
+        localStorage.setItem("FBToken", `Bearer ${res.data.token}`);
         history.push("/home");
-      } catch (error) {
-        alert(error);
-      }
-    },
-    [history]
-  );
-
-  const { currentUser } = useContext(AuthContext);
-  if (currentUser) return <Redirect to="/home" />;
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <AuthPageWrapper label="Sign in">
       <form className={classes.form} noValidate onSubmit={handleLogin}>
-        <SignInInputs />
+        <SignInInputs handleChange={handleChange} />
         <Button
           type="submit"
           fullWidth

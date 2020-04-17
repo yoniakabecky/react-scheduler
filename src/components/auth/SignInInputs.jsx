@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 
-const SignInInputs = () => {
+const SignInInputs = ({ handleChange }) => {
   return (
     <>
       <TextField
@@ -12,8 +12,10 @@ const SignInInputs = () => {
         id="email"
         label="Email Address"
         name="email"
+        type="email"
         autoComplete="email"
         autoFocus
+        onChange={handleChange}
       />
       <TextField
         variant="outlined"
@@ -22,8 +24,10 @@ const SignInInputs = () => {
         fullWidth
         id="password"
         label="Password"
+        name="password"
         type="password"
         autoComplete="current-password"
+        onChange={handleChange}
       />
     </>
   );

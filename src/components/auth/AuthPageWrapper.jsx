@@ -25,17 +25,17 @@ const AuthPageWrapper = ({ label, children }) => {
   );
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "10vh",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: "1rem",
-    backgroundColor: "#f50057"
-  }
+    backgroundColor: theme.palette.secondary.main,
+  },
 }));
 
 export default AuthPageWrapper;
