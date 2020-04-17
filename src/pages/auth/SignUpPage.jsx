@@ -32,8 +32,8 @@ const SignUpPage = ({ history }) => {
     axios
       .post("/signup", newUser)
       .then((res) => {
-        // TODO: save token
-        console.log("signed up", res.data);
+        console.log("signed up");
+        localStorage.setItem("FBToken", `Bearer ${res.data.token}`);
         history.push("/home");
       })
       .catch((err) => console.error(err));

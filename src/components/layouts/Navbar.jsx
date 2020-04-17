@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 //Mui
@@ -11,11 +11,8 @@ import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import BrandLogo from "./BrandLogo";
 
-import { AuthContext } from "../../context/Auth";
-
-const Navbar = () => {
+const Navbar = ({ authenticated }) => {
   const classes = useStyles();
-  const { currentUser } = useContext(AuthContext);
 
   return (
     <AppBar position="static">
@@ -23,7 +20,7 @@ const Navbar = () => {
         <Link to="/home" className={classes.brandLogo}>
           <BrandLogo color="light" size={2} />
         </Link>
-        {currentUser ? <SignedInLinks /> : <SignedOutLinks />}
+        {authenticated ? <SignedInLinks /> : <SignedOutLinks />}
       </Toolbar>
     </AppBar>
   );

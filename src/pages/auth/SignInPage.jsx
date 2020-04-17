@@ -1,13 +1,10 @@
-import React, { useContext, useState } from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 
 // Mui
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-
-// Auth
-import { AuthContext } from "../../context/Auth";
 
 // Component
 import AuthPageWrapper from "../../components/auth/AuthPageWrapper";
@@ -33,16 +30,12 @@ const SignInPage = ({ history }) => {
     axios
       .post("/signin", userData)
       .then((res) => {
-        // TODO: save token
-        console.log("signed in", res.data);
+        console.log("signed in");
+        localStorage.setItem("FBToken", `Bearer ${res.data.token}`);
         history.push("/home");
       })
       .catch((err) => console.log(err));
   };
-
-  // TODO: current user
-  const { currentUser } = useContext(AuthContext);
-  if (currentUser) return <Redirect to="/home" />;
 
   return (
     <AuthPageWrapper label="Sign in">
