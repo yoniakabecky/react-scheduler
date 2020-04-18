@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
@@ -25,24 +27,26 @@ import theme from "./utils/theme";
 
 function App() {
   return (
-    <AuthProvider>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <Router>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <PrivateRoute path="/home" component={HomePage} />
-            <PrivateRoute path="/week" component={WeekSchedule} />
-            <PrivateRoute path="/day" component={DaySchedule} />
-            <Route path="/sign-in" component={SignInPage} />
-            <Route path="/sign-up" component={SignUpPage} />
-            <Route path="/forget-password" component={ForgetPassword} />
-          </Switch>
-          <Footer />
-        </Router>
-      </MuiThemeProvider>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={LandingPage} />
+              <PrivateRoute path="/home" component={HomePage} />
+              <PrivateRoute path="/week" component={WeekSchedule} />
+              <PrivateRoute path="/day" component={DaySchedule} />
+              <Route path="/sign-in" component={SignInPage} />
+              <Route path="/sign-up" component={SignUpPage} />
+              <Route path="/forget-password" component={ForgetPassword} />
+            </Switch>
+            <Footer />
+          </Router>
+        </MuiThemeProvider>
+      </AuthProvider>
+    </Provider>
   );
 }
 
