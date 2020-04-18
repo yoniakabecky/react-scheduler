@@ -3,7 +3,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
-const SignUpInputs = () => {
+const SignUpInputs = ({ handleChange }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -11,11 +11,13 @@ const SignUpInputs = () => {
           variant="outlined"
           required
           fullWidth
-          id="displayName"
-          label="Company Name"
+          id="userName"
+          label="User Name"
+          name="userName"
           type="text"
-          autoComplete="display-name"
+          autoComplete="username"
           autoFocus
+          onChange={handleChange}
         />
       </Grid>
       <Grid item xs={12}>
@@ -25,8 +27,10 @@ const SignUpInputs = () => {
           fullWidth
           id="email"
           label="Email Address"
+          name="email"
           type="email"
           autoComplete="email"
+          onChange={handleChange}
         />
       </Grid>
       <Grid item xs={12}>
@@ -36,8 +40,21 @@ const SignUpInputs = () => {
           fullWidth
           id="password"
           label="Password"
+          name="password"
           type="password"
-          autoComplete="current-password"
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          id="confirmPassword"
+          label="Confirm Password"
+          name="confirmPassword"
+          type="password"
+          onChange={handleChange}
         />
       </Grid>
     </Grid>
