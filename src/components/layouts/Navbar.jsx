@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 //Mui
 import AppBar from "@material-ui/core/AppBar";
@@ -32,4 +33,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  authenticated: state.employee.authenticated,
+});
+
+export default connect(mapStateToProps)(Navbar);

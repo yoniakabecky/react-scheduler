@@ -1,24 +1,21 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+
+// Redux
+import { connect } from "react-redux";
+import { signOutUser } from "../../actions/employeeActions";
 
 // Mui
 import Button from "@material-ui/core/Button";
 import AvatarIcon from "@material-ui/icons/AccountCircle";
 
-// Auth
-import { auth } from "../../firebase/firebase";
-
 // Components
 import DropdownMenu from "./DropdownMenu";
 
-const SignedInLinks = ({ history }) => {
+const SignedInLinks = ({ signOutUser }) => {
   const [open, setOpen] = React.useState(null);
 
-  const handleSignOut = async (event) => {
-    await auth
-      .signOut()
-      .then(() => history.push("/"))
-      .catch((error) => alert(error));
+  const handleSignOut = () => {
+    signOutUser();
   };
 
   const handleClick = (event) => {
@@ -43,4 +40,4 @@ const SignedInLinks = ({ history }) => {
   );
 };
 
-export default withRouter(SignedInLinks);
+export default connect(null, { signOutUser })(SignedInLinks);

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 
 // Mui
 import Button from "@material-ui/core/Button";
@@ -11,7 +10,11 @@ import AuthPageWrapper from "../../components/auth/AuthPageWrapper";
 import SignInInputs from "../../components/auth/SignInInputs";
 import LinkToSignUp from "../../components/auth/LinkToSignUp";
 
-const SignInPage = ({ history }) => {
+// redux
+import { connect } from "react-redux";
+import { signInUser } from "../../actions/employeeActions";
+
+const SignInPage = ({ history, signInUser }) => {
   const classes = useStyles();
   const [userData, setUserData] = useState({
     email: "",
@@ -27,14 +30,7 @@ const SignInPage = ({ history }) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    axios
-      .post("/signin", userData)
-      .then((res) => {
-        console.log("signed in");
-        localStorage.setItem("FBToken", `Bearer ${res.data.token}`);
-        history.push("/home");
-      })
-      .catch((err) => console.log(err));
+    signInUser(userData, history);
   };
 
   return (
@@ -65,4 +61,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default withRouter(SignInPage);
+const mapStateToProps = (state) => ({
+  employee: state.employee,
+});
+
+export default connect(mapStateToProps, { signInUser })(withRouter(SignInPage));
