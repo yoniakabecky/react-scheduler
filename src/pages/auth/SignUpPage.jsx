@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 
 // Mui
 import Button from "@material-ui/core/Button";
@@ -11,7 +10,11 @@ import AuthPageWrapper from "../../components/auth/AuthPageWrapper";
 import SignUpInputs from "../../components/auth/SignUpInputs";
 import LinkToSignIn from "../../components/auth/LinkToSignIn";
 
-const SignUpPage = ({ history }) => {
+// redux
+import { connect } from "react-redux";
+import { signUpUser } from "../../actions/employeeActions";
+
+const SignUpPage = ({ history, signUpUser }) => {
   const classes = useStyles();
   const [newUser, setNewUser] = useState({
     email: "",
@@ -29,14 +32,7 @@ const SignUpPage = ({ history }) => {
 
   const handleSignUp = (event) => {
     event.preventDefault();
-    axios
-      .post("/signup", newUser)
-      .then((res) => {
-        console.log("signed up");
-        localStorage.setItem("FBToken", `Bearer ${res.data.token}`);
-        history.push("/home");
-      })
-      .catch((err) => console.error(err));
+    signUpUser(newUser, history);
   };
 
   return (
@@ -67,4 +63,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default withRouter(SignUpPage);
+const mapStateToProps = (state) => ({
+  employee: state.employee,
+});
+
+export default connect(mapStateToProps, { signUpUser })(withRouter(SignUpPage));

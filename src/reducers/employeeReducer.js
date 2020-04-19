@@ -1,14 +1,24 @@
-import { SET_AUTHENTICATED } from "../constants/actionTypes";
+import {
+  SET_AUTHENTICATED,
+  SET_UNAUTHENTICATED,
+} from "../constants/actionTypes";
 
 const initialState = {
   authenticated: false,
 };
 
 const employeeReducer = (state = initialState, action) => {
-  if (action.type === SET_AUTHENTICATED) {
-    // sign in
+  switch (action.type) {
+    case SET_AUTHENTICATED:
+      return {
+        ...state,
+        authenticated: true,
+      };
+    case SET_UNAUTHENTICATED:
+      return initialState;
+    default:
+      return state;
   }
-  return state;
 };
 
 export default employeeReducer;

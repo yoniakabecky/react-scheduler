@@ -1,8 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+
+// Redux
 import { Provider } from "react-redux";
 import store from "./store/store";
-import jwtDecode from "jwt-decode";
+import { SET_AUTHENTICATED } from "./constants/actionTypes";
+import { signOutUser } from "./actions/employeeActions";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
@@ -24,17 +29,16 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./utils/theme";
 
-// Auth
 const token = localStorage.FBToken;
-let authenticated = false;
 
 if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
+    store.dispatch(signOutUser());
     window.location.href = "/sign-in";
-    authenticated = false;
   } else {
-    authenticated = true;
+    store.dispatch({ type: SET_AUTHENTICATED });
+    axios.defaults.headers.common["Authentication"] = token;
   }
 }
 
@@ -47,31 +51,11 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <PrivateRoute
-              path="/home"
-              component={HomePage}
-              authenticated={authenticated}
-            />
-            <PrivateRoute
-              path="/week"
-              component={WeekSchedule}
-              authenticated={authenticated}
-            />
-            <PrivateRoute
-              path="/day"
-              component={DaySchedule}
-              authenticated={authenticated}
-            />
-            <AuthRoute
-              path="/sign-in"
-              component={SignInPage}
-              authenticated={authenticated}
-            />
-            <AuthRoute
-              path="/sign-up"
-              component={SignUpPage}
-              authenticated={authenticated}
-            />
+            <PrivateRoute path="/home" component={HomePage} />
+            <PrivateRoute path="/week" component={WeekSchedule} />
+            <PrivateRoute path="/day" component={DaySchedule} />
+            <AuthRoute path="/sign-in" component={SignInPage} />
+            <AuthRoute path="/sign-up" component={SignUpPage} />
             <Route path="/forget-password" component={ForgetPassword} />
           </Switch>
           <Footer />
