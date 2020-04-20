@@ -1,4 +1,5 @@
 import React from "react";
+import { SIGN_UP } from "../../constants/pathNames";
 
 import LinkedButton from "../layouts/LinkedButton";
 import Typography from "@material-ui/core/Typography";
@@ -14,7 +15,7 @@ const LandingLeftPane = () => {
         Make your work shifts easily
       </Typography>
 
-      <LinkedButton color="secondary" route="/sign-up" label="Get Started" />
+      <LinkedButton color="secondary" route={SIGN_UP} label="Get Started" />
     </section>
   );
 };

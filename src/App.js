@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import * as Path from "./constants/pathNames";
 
 // Redux
 import { Provider } from "react-redux";
@@ -35,7 +36,7 @@ if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
     store.dispatch(signOutUser());
-    window.location.href = "/sign-in";
+    window.location.href = `${Path.SIGN_IN}`;
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
     axios.defaults.headers.common["Authentication"] = token;
@@ -50,13 +51,13 @@ function App() {
         <Router>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <PrivateRoute path="/home" component={HomePage} />
-            <PrivateRoute path="/week" component={WeekSchedule} />
-            <PrivateRoute path="/day" component={DaySchedule} />
-            <AuthRoute path="/sign-in" component={SignInPage} />
-            <AuthRoute path="/sign-up" component={SignUpPage} />
-            <Route path="/forget-password" component={ForgetPassword} />
+            <Route exact path={Path.LANDING_PAGE} component={LandingPage} />
+            <PrivateRoute path={Path.USER_HOME} component={HomePage} />
+            <PrivateRoute path={Path.WEEKLY_VIEW} component={WeekSchedule} />
+            <PrivateRoute path={Path.DAILY_VIEW} component={DaySchedule} />
+            <AuthRoute path={Path.SIGN_IN} component={SignInPage} />
+            <AuthRoute path={Path.SIGN_UP} component={SignUpPage} />
+            <Route path={Path.FORGET_PASSWORD} component={ForgetPassword} />
           </Switch>
           <Footer />
         </Router>

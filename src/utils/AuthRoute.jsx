@@ -1,4 +1,5 @@
 import React from "react";
+import { USER_HOME } from "../constants/pathNames";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -7,7 +8,7 @@ const AuthRoute = ({ component: Component, authenticated, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        authenticated ? <Redirect to="/home" /> : <Component {...props} />
+        authenticated ? <Redirect to={USER_HOME} /> : <Component {...props} />
       }
     />
   );

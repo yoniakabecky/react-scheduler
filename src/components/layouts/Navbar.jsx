@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { USER_HOME } from "../../constants/pathNames";
 
 //Mui
 import AppBar from "@material-ui/core/AppBar";
@@ -18,7 +19,7 @@ const Navbar = ({ authenticated }) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Link to="/home" className={classes.brandLogo}>
+        <Link to={USER_HOME} className={classes.brandLogo}>
           <BrandLogo color="light" size={2} />
         </Link>
         {authenticated ? <SignedInLinks /> : <SignedOutLinks />}
