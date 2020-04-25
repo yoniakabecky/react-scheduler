@@ -21,7 +21,6 @@ import ForgetPassword from "./pages/auth/ForgetPassword";
 
 // Components
 import Navbar from "./components/layouts/Navbar";
-import Footer from "./components/layouts/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 import AuthRoute from "./utils/AuthRoute";
 
@@ -59,7 +58,6 @@ function App() {
             <AuthRoute path={Path.SIGN_UP} component={SignUpPage} />
             <Route path={Path.FORGET_PASSWORD} component={ForgetPassword} />
           </Switch>
-          <Footer />
         </Router>
       </MuiThemeProvider>
     </Provider>

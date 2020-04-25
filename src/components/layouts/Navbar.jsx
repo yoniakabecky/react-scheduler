@@ -18,7 +18,7 @@ const Navbar = ({ authenticated }) => {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar component="nav">
         <Link to={USER_HOME} className={classes.brandLogo}>
           <BrandLogo color="light" size={2} />
         </Link>
