@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // Component
 import AuthPageWrapper from "../../components/auth/AuthPageWrapper";
 import SignInInputs from "../../components/auth/SignInInputs";
-import LinkToSignUp from "../../components/auth/LinkToSignUp";
+import LinkToSignUp from "../../components/auth/LinkToSignIn";
 
 // redux
 import { connect } from "react-redux";

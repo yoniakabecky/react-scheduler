@@ -12,7 +12,7 @@ import { signOutUser } from "./actions/employeeActions";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
-import HomePage from "./pages/HomePage";
+import UserHomePage from "./pages/UserHomePage";
 import WeekSchedule from "./pages/schedules/WeekSchedule";
 import DaySchedule from "./pages/schedules/DaySchedule";
 import SignInPage from "./pages/auth/SignInPage";
@@ -51,7 +51,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path={Path.LANDING_PAGE} component={LandingPage} />
-            <PrivateRoute path={Path.USER_HOME} component={HomePage} />
+            <PrivateRoute path={Path.USER_HOME} component={UserHomePage} />
             <PrivateRoute path={Path.WEEKLY_VIEW} component={WeekSchedule} />
             <PrivateRoute path={Path.DAILY_VIEW} component={DaySchedule} />
             <AuthRoute path={Path.SIGN_IN} component={SignInPage} />
