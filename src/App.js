@@ -8,7 +8,7 @@ import * as Path from "./constants/pathNames";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { SET_AUTHENTICATED } from "./constants/actionTypes";
-import { signOutUser } from "./actions/employeeActions";
+import { signOutUser, getUserData } from "./actions/employeeActions";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
@@ -39,6 +39,7 @@ if (token) {
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
     axios.defaults.headers.common["Authentication"] = token;
+    store.dispatch(getUserData());
   }
 }
 
