@@ -10,9 +10,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 // Components
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
-import BrandLogo from "./BrandLogo";
+import BrandLogo from "../layouts/BrandLogo";
 
-const Navbar = ({ authenticated }) => {
+const Navbar = ({ authenticated, user }) => {
   return (
     <AppBar position="static">
       <Toolbar component="nav">
@@ -20,7 +20,7 @@ const Navbar = ({ authenticated }) => {
           <BrandLogo color="light" size={2} />
         </Link>
         <span style={{ flexGrow: 1 }} />
-        {authenticated ? <SignedInLinks /> : <SignedOutLinks />}
+        {authenticated ? <SignedInLinks user={user} /> : <SignedOutLinks />}
       </Toolbar>
     </AppBar>
   );
@@ -28,6 +28,7 @@ const Navbar = ({ authenticated }) => {
 
 const mapStateToProps = (state) => ({
   authenticated: state.employee.authenticated,
+  user: state.employee.user,
 });
 
 export default connect(mapStateToProps)(Navbar);

@@ -12,7 +12,7 @@ import LinkToSignIn from "../../components/auth/LinkToSignIn";
 
 // redux
 import { connect } from "react-redux";
-import { signUpUser } from "../../actions/employeeActions";
+import { signUpUser } from "../../redux/actions/employeeActions";
 
 const SignUpPage = ({ history, signUpUser }) => {
   const classes = useStyles();
