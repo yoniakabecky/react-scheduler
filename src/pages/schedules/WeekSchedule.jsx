@@ -8,7 +8,7 @@ import {
   TableBody,
   Chip,
   Avatar,
-  Container
+  Container,
   // Fab, Tooltip
 } from "@material-ui/core";
 import { Edit /*Add*/ } from "@material-ui/icons";
@@ -16,15 +16,15 @@ import { Edit /*Add*/ } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import ChangeSchedule from "../../components/dialogs/ChangeSchedule";
 
-import { week1 } from "../../store/initialData";
+import { week1 } from "../../redux/store/initialData";
 
 const styles = {
   wrapper: {
-    overflowX: "scroll"
+    overflowX: "scroll",
   },
   fab: {
-    margin: "2rem"
-  }
+    margin: "2rem",
+  },
   // absolute: {
   //   position: 'absolute',
   //   bottom: "2rem",
@@ -36,7 +36,7 @@ const WeekSchedule = () => {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [editData, setEditData] = React.useState(null);
 
-  const handleClick = day => {
+  const handleClick = (day) => {
     setOpenDialog(true);
     setEditData(day);
   };
