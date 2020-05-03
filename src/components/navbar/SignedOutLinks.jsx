@@ -1,7 +1,7 @@
 import React from "react";
 import { SIGN_IN, SIGN_UP } from "../../constants/pathNames";
 
-import LinkedButton from "./LinkedButton";
+import LinkedButton from "../layouts/LinkedButton";
 
 const SignedOutLinks = () => {
   return (

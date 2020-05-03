@@ -2,7 +2,7 @@ import React from "react";
 
 // Redux
 import { connect } from "react-redux";
-import { signOutUser } from "../../actions/employeeActions";
+import { signOutUser } from "../../redux/actions/employeeActions";
 
 // Mui
 import Button from "@material-ui/core/Button";

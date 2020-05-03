@@ -6,9 +6,9 @@ import * as Path from "./constants/pathNames";
 
 // Redux
 import { Provider } from "react-redux";
-import store from "./store/store";
+import store from "./redux/store/store";
 import { SET_AUTHENTICATED } from "./constants/actionTypes";
-import { signOutUser, getUserData } from "./actions/employeeActions";
+import { signOutUser, getUserData } from "./redux/actions/employeeActions";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
@@ -20,7 +20,7 @@ import SignUpPage from "./pages/auth/SignUpPage";
 import ForgetPassword from "./pages/auth/ForgetPassword";
 
 // Components
-import Navbar from "./components/layouts/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import PrivateRoute from "./utils/PrivateRoute";
 import AuthRoute from "./utils/AuthRoute";
 
@@ -38,7 +38,7 @@ if (token) {
     window.location.href = `${Path.SIGN_IN}`;
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
-    axios.defaults.headers.common["Authentication"] = token;
+    axios.defaults.headers.common["Authorization"] = token;
     store.dispatch(getUserData());
   }
 }

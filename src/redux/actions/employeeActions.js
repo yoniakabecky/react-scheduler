@@ -2,7 +2,8 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   SET_USER,
-} from "../constants/actionTypes";
+  LOADING_USER,
+} from "../../constants/actionTypes";
 import axios from "axios";
 
 export const signInUser = (userData, history) => (dispatch) => {
@@ -42,6 +43,7 @@ const setAuthHeader = (token) => {
 };
 
 export const getUserData = () => (dispatch) => {
+  dispatch({ type: LOADING_USER });
   axios
     .get("/user")
     .then((res) => {

@@ -2,7 +2,8 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   SET_USER,
-} from "../constants/actionTypes";
+  LOADING_USER,
+} from "../../constants/actionTypes";
 
 const initialState = {
   authenticated: false,
@@ -22,6 +23,10 @@ const employeeReducer = (state = initialState, action) => {
       return {
         authenticated: true,
         ...action.payload,
+      };
+    case LOADING_USER:
+      return {
+        ...state,
       };
     default:
       return state;

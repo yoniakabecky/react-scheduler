@@ -10,7 +10,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 // Components
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
-import BrandLogo from "./BrandLogo";
+import BrandLogo from "../layouts/BrandLogo";
 
 const Navbar = ({ authenticated }) => {
   return (
