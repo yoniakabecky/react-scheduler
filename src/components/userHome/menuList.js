@@ -43,7 +43,7 @@ export default [
   },
   {
     title: "Settings",
-    path: path.MY_SCHEDUEL,
+    path: path.USER_SETTING,
     icon: <SettingsIcon />,
     disabled: false,
   },

@@ -1,43 +1,32 @@
 import React from "react";
 
-// Redux
-import { connect } from "react-redux";
-import { signOutUser } from "../../redux/actions/employeeActions";
-
 // Mui
 import Button from "@material-ui/core/Button";
-import AvatarIcon from "@material-ui/icons/AccountCircle";
+import Avatar from "@material-ui/core/Avatar";
 
 // Components
 import DropdownMenu from "./DropdownMenu";
 
-const SignedInLinks = ({ signOutUser }) => {
+const SignedInLinks = ({ user }) => {
+  const { imageUrl, userName } = user;
   const [open, setOpen] = React.useState(null);
-
-  const handleSignOut = () => {
-    signOutUser();
-  };
 
   const handleClick = (event) => {
     setOpen(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setOpen(null);
-  };
-
   return (
     <>
       <Button color="inherit" onClick={handleClick}>
-        <AvatarIcon />
+        <Avatar
+          alt={userName}
+          src={imageUrl}
+          style={{ height: "2rem", width: "2rem" }}
+        />
       </Button>
-      <DropdownMenu
-        open={open}
-        handleClose={handleClose}
-        handleSignOut={handleSignOut}
-      />
+      <DropdownMenu open={open} user={user} handleClose={() => setOpen(null)} />
     </>
   );
 };
 
-export default connect(null, { signOutUser })(SignedInLinks);
+export default SignedInLinks;
