@@ -5,5 +5,6 @@ export const FORGET_PASSWORD = "/forget-password";
 export const USER_HOME = "/home";
 export const USER_SETTING = "/setting";
 export const MY_SCHEDUEL = "/scheduel";
+export const MONTHLY_VIEW = "/month";
 export const WEEKLY_VIEW = "/week";
 export const DAILY_VIEW = "/day";
