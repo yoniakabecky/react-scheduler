@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 //mui
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,35 +17,35 @@ const SideMenuList = () => {
   return (
     <>
       <List>
-        <Link to={userMenu.path}>
+        <NavLink to={userMenu.path} activeClassName={classes.activeLink}>
           <ListItem button>
             <ListItemIcon className={classes.icons}>
               {userMenu.icon}
             </ListItemIcon>
             <ListItemText primary={userMenu.name} />
           </ListItem>
-        </Link>
+        </NavLink>
       </List>
       <Divider className={classes.divider} />
       <List>
         {scheduleViewList.map(({ name, icon, path }, index) => (
-          <Link to={path} key={index}>
+          <NavLink to={path} key={index}>
             <ListItem button>
               <ListItemIcon className={classes.icons}>{icon}</ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
-          </Link>
+          </NavLink>
         ))}
       </List>
       <Divider className={classes.divider} />
       <List>
         {companyMenu.map(({ name, icon, path }, index) => (
-          <Link to={path} key={index}>
+          <NavLink to={path} key={index}>
             <ListItem button>
               <ListItemIcon className={classes.icons}>{icon}</ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
-          </Link>
+          </NavLink>
         ))}
       </List>
     </>
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   icons: {
-    color: theme.palette.primary.contrastText,
+    color: "inherit",
   },
   chevron: {
     width: "3rem",
@@ -93,6 +93,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.light,
     width: "90%",
     margin: "0 auto",
+  },
+  activeLink: {
+    color: theme.palette.secondary.main,
   },
 }));
 

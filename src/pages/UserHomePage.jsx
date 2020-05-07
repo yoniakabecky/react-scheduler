@@ -10,7 +10,7 @@ const UserHomePage = () => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="md" component="section" className={classes.root}>
+    <Container maxWidth="md" component="section" className={classes.container}>
       {menuList.map((menu, index) => (
         <MenuCard props={menu} key={index} />
       ))}
@@ -19,12 +19,11 @@ const UserHomePage = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    height: "calc(100vh - 64px)",
-    alignContent: "center",
+  container: {
+    ...theme.global.container,
+    [theme.breakpoints.up("sm")]: {
+      height: "calc(100vh - 64px)",
+    },
   },
 }));
 

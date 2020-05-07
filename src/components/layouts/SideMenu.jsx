@@ -1,12 +1,12 @@
 import React from "react";
 import cx from "classnames";
 
-//mui
+// mui
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 
-//icons
+// icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -15,7 +15,7 @@ import SideMenuList from "./SideMenuList";
 
 const SideMenu = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const { open, setOpen } = props;
 
   return (
     <Drawer
@@ -41,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
     width: 240,
     flexShrink: 0,
     whiteSpace: "nowrap",
-    paddingLeft: "0.5rem",
-    top: 56,
+    top: theme.spacing(7),
     [theme.breakpoints.up("sm")]: {
-      top: 64,
+      paddingLeft: "0.5rem",
+      top: theme.spacing(8),
     },
     background: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
