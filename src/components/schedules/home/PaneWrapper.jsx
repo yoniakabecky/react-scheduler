@@ -9,7 +9,12 @@ const PaneWrapper = ({ title, children }) => {
 
   return (
     <Paper component="section" elevation={3} className={classes.root}>
-      <Typography variant="h6" component="h2" color="textSecondary">
+      <Typography
+        variant="h6"
+        component="h2"
+        color="textSecondary"
+        className={classes.title}
+      >
         {title}
       </Typography>
       {children ? (
@@ -32,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
+  },
+  title: {
+    marginBottom: "0.5rem",
   },
   children: {
     display: "flex",
