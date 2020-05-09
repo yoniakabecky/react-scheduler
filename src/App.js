@@ -18,6 +18,7 @@ import DaySchedule from "./pages/schedules/DaySchedule";
 import SignInPage from "./pages/auth/SignInPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import ForgetPassword from "./pages/auth/ForgetPassword";
+import ScheduleHome from "./pages/schedules/ScheduleHomePage";
 
 // Components
 import Navbar from "./components/navbar/Navbar";
@@ -53,6 +54,7 @@ function App() {
           <Switch>
             <Route exact path={Path.LANDING_PAGE} component={LandingPage} />
             <PrivateRoute path={Path.USER_HOME} component={UserHomePage} />
+            <PrivateRoute path={Path.MY_SCHEDUEL} component={ScheduleHome} />
             <PrivateRoute path={Path.WEEKLY_VIEW} component={WeekSchedule} />
             <PrivateRoute path={Path.DAILY_VIEW} component={DaySchedule} />
             <AuthRoute path={Path.SIGN_IN} component={SignInPage} />
